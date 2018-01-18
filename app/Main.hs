@@ -39,3 +39,7 @@ splitAtIndex k l = (take k l, drop k l)
 dropK k l = take k l ++ drop (k +1) l
 
 slice i k l = take (k-i) (drop i l)
+
+insertElem x k l = take k l ++ x:(drop k l)
+
+rotate n l = drop n l ++ take n l
