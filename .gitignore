@@ -1,3 +1,5 @@
 .stack-work/
 haskell-tinkering.cabal
 *~
+
+.idea/workspace.xml
