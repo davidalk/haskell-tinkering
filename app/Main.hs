@@ -22,7 +22,7 @@ nounAdj = [adjective ++ " " ++ noun | adjective <- adjectives, noun <- nouns]
 
 rightAngleTriangles = [ (a, b, c) | c <- [1..10], b <- [1..10], a <- [1..10], a^2 + b^2 == c^2, a+b+c == 24 ]
 
--- Starting out exercises
+-- 02 Starting out exercises
 
 penultimate l = last (init l)
 
@@ -43,3 +43,16 @@ slice i k l = take (k-i) (drop i l)
 insertElem x k l = take k l ++ x:(drop k l)
 
 rotate n l = drop n l ++ take n l
+
+-- 03 types and typeclasses
+
+data Colour = Red | Orange | Yellow | Green | Blue | Indigo | Violet
+    deriving (Eq, Ord, Show, Bounded, Enum)
+
+firstColour = minBound :: Colour
+
+reverseColourOrder = reverse [minBound .. maxBound] :: [Colour]
+
+paintMix c1 c2 = [fst orderedPair .. snd orderedPair] !! quot (length [fst orderedPair .. snd orderedPair]) 2
+  where
+  orderedPair = if c1 < c2 then (c1, c2) else (c2, c1)
