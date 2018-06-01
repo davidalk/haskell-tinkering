@@ -56,3 +56,20 @@ reverseColourOrder = reverse [minBound .. maxBound] :: [Colour]
 paintMix c1 c2 = [fst orderedPair .. snd orderedPair] !! quot (length [fst orderedPair .. snd orderedPair]) 2
   where
   orderedPair = if c1 < c2 then (c1, c2) else (c2, c1)
+
+  -- 04 Syntax in functions
+
+  -- 05 Recursion
+
+stepReverseSign :: (Fractional a, Ord a) => a -> a -> a
+stepReverseSign a b = -((abs a) + b)
+
+-- 06 Higher order functions
+sumInts :: Int -> Int -> Int
+sumInts a b = if a < b then a + sumInts (a+1) b else a
+
+sq :: Int -> Int
+sq x = x * x
+
+sumSquares :: Int -> Int -> Int
+sumSquares a b = if a < b then sq a + sumInts (a+1) b else sq a
