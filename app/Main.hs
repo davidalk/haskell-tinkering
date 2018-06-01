@@ -59,6 +59,27 @@ paintMix c1 c2 = [fst orderedPair .. snd orderedPair] !! quot (length [fst order
 
   -- 04 Syntax in functions
 
+englishDigit :: Int -> String
+englishDigit 9 = "nine"
+englishDigit 8 = "eight"
+englishDigit 7 = "seven"
+englishDigit 6 = "six"
+englishDigit 5 = "five"
+englishDigit 4 = "four"
+englishDigit 3 = "three"
+englishDigit 2 = "two"
+englishDigit 1 = "one"
+englishDigit 0 = "zero"
+englishDigit _ = "unknown"
+
+divTuple :: (Eq a, Fractional a) => (a, a) -> a
+divTuple (_, 0) = undefined
+divTuple (x, y) = x / y
+
+threeZeroList :: [Int] -> Bool
+threeZeroList (0:0:0:xs) = True
+threeZeroList _ = False
+
   -- 05 Recursion
 
 stepReverseSign :: (Fractional a, Ord a) => a -> a -> a
