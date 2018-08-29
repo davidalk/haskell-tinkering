@@ -1,6 +1,7 @@
 module Main where
 
 import Lib
+import DistanceConversions
 
 main :: IO ()
 main = someFunc
@@ -93,4 +94,27 @@ sq :: Int -> Int
 sq x = x * x
 
 sumSquares :: Int -> Int -> Int
-sumSquares a b = if a < b then sq a + sumInts (a+1) b else sq a
+sumSquares a b = if a < b then sq a + sumSquares (a+1) b else sq a
+
+higherOrderSum :: (Int -> Int) -> Int -> Int -> Int
+higherOrderSum intApplication a b = if a < b then intApplication a + higherOrderSum intApplication (a + 1) b else intApplication a
+
+hoSumSquares :: Int -> Int -> Int
+hoSumSquares = higherOrderSum sq
+
+hoSumInts :: Int -> Int -> Int
+hoSumInts = higherOrderSum (\x -> x)
+
+higherOrderSequenceApplication :: (Int -> Int) ->  (Int -> Int -> Int) -> Int -> Int -> Int
+higherOrderSequenceApplication f op a b = if a < b then f a `op` higherOrderSequenceApplication f op (a + 1) b else f b
+
+-- 07 Modules
+
+areaConv :: (Float -> Float) -> Float -> Float
+areaConv linearConversion area = linearConversion $ linearConversion area
+
+sqInToSqCm :: Float -> Float
+sqInToSqCm = inchesToCentimetres . inchesToCentimetres
+
+sqChainsToSqM :: Float -> Float
+sqChainsToSqM = (^ 2) . (/ 100) . inchesToCentimetres .feetToInches . yardsToFeet . sqrt . (* 484)
