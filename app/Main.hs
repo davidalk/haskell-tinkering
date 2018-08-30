@@ -114,7 +114,7 @@ areaConv :: (Float -> Float) -> Float -> Float
 areaConv linearConversion area = linearConversion $ linearConversion area
 
 sqInToSqCm :: Float -> Float
-sqInToSqCm = inchesToCentimetres . inchesToCentimetres
+sqInToSqCm = areaConv inchesToCentimetres
 
 sqChainsToSqM :: Float -> Float
-sqChainsToSqM = (^ 2) . (/ 100) . inchesToCentimetres .feetToInches . yardsToFeet . sqrt . (* 484)
+sqChainsToSqM = areaConv chainsToMeters
