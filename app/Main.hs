@@ -118,3 +118,20 @@ sqInToSqCm = areaConv inchesToCentimetres
 
 sqChainsToSqM :: Float -> Float
 sqChainsToSqM = areaConv chainsToMeters
+
+-- 08 Types
+
+data Suit = Clubs | Diamonds | Hearts | Spades deriving (Show, Eq, Ord)
+data Digit = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | Jack | Queen | King | Ace deriving (Show, Eq, Ord)
+data Card = Card Digit Suit deriving (Eq)
+
+instance Show Card where 
+  show (Card digit suit) = "The " ++ show digit ++ " of " ++ show suit
+
+instance Ord Card where
+  (<=) (Card digit1 suit1) (Card digit2 suit2) = suit1 <= suit2  && digit1 <= digit2
+
+
+-- We should be able to provide a function which returns the higher ranked card:
+betterCard :: Card -> Card -> Card
+betterCard x y = if x > y then x else y
