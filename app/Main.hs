@@ -135,3 +135,21 @@ instance Ord Card where
 -- We should be able to provide a function which returns the higher ranked card:
 betterCard :: Card -> Card -> Card
 betterCard x y = if x > y then x else y
+
+-- Here is a new Typeclass, which represents some kind of playing hand in a game.
+-- It returns True for a "winning hand", depending on the rules for the type of class we are playing with
+class Hand a where
+  play :: [a] -> Bool
+
+-- Implement Hand for Card, where play returns true if the list contains the Ace of Spades
+instance Hand Card where
+  play c = elem (Card Ace Spades) c
+
+-- Create a new Coin type
+data Coin = Heads | Tails deriving (Eq)
+
+-- Implement Hand for Coin, where play returns true if there are ten heads in a row in the list
+instance Hand Coin where
+  play c 
+    | length c < 10 = False
+    | otherwise = if  (take 10 c) == (replicate 10 Heads) then True else play (drop 1 c)
